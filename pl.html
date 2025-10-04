@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programming Languages</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: white;
+      color: black;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: black;
+      padding: 22px 30px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 600;
+      background: linear-gradient(90deg, #00ff87, #60efff, #ff6ec4, #7873f5);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: floatGradient 5s infinite linear;
+    }
+
+    @keyframes floatGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .header-separator {
+      width: 2px;
+      height: 32px;
+      background-color: #76B900;
+    }
+
+    nav {
+      display: flex;
+      gap: 1cm;
+    }
+
+    nav button, .subscription-btn {
+      background: white;
+      color: black;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 0;
+      cursor: pointer;
+      font-size: 15px;
+      transition: transform 0.2s ease, background 0.2s ease;
+      width: 130px;
+      text-align: center;
+    }
+
+    nav button:hover, .subscription-btn:hover {
+      transform: scale(1.05);
+      background: #f0f0f0;
+    }
+
+    .subscription-btn {
+      background-color: #FFA500;
+      color: black;
+      font-weight: bold;
+    }
+
+    .subscription-btn:active {
+      transform: scale(1.1);
+    }
+
+    .right-controls {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .profile-icon {
+      font-size: 22px;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .profile-icon:hover {
+      transform: scale(1.1);
+      color: #00ff87;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 20;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 15;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: black;
+      width: 35%;
+      height: 35vh;
+      position: fixed;
+      top: -35vh;
+      right: 0;
+      z-index: 20;
+      transition: top 0.4s ease-in-out;
+      color: white;
+      padding: 20px 10px;
+    }
+
+    .mobile-menu.show {
+      display: flex;
+      top: 0;
+    }
+
+    .mobile-menu div {
+      padding: 12px;
+      text-align: left;
+      font-size: 16px;
+      border-bottom: 1px solid #333;
+      cursor: pointer;
+    }
+
+    /* Page Content */
+    .page-content {
+      padding: 1cm 1cm 0 1cm;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5cm; /* 0.5cm gap above separator */
+    }
+
+    .page-heading {
+      font-family: 'Bahnschrift SemiBold Condensed', 'Arial Narrow', sans-serif;
+      font-weight: 700;
+      font-size: 1.5cm;
+      line-height: 1.5cm;
+      letter-spacing: 3px;
+      margin: 0;
+    }
+
+    hr.separator {
+      margin: 0.5cm 0;
+      border: 0;
+      height: 1px;
+      background: black;
+      width: 100%; /* Matches content area width */
+    }
+
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1cm;
+    }
+
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card {
+      width: 300px;
+      height: 180px;
+      background: linear-gradient(to bottom, var(--card-color) 65%, white 35%);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: scale(1.1);
+    }
+
+    .card-symbol {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 30px;
+    }
+
+    .card-content {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+    }
+
+    .card-subheading {
+      font-family: 'Calibri', Arial, sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: black;
+      margin: 0 0 5px 0;
+    }
+
+    .card-description {
+      font-family: 'Calibri', Arial, sans-serif;
+      font-size: 12px;
+      color: #333;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    /* Language-specific colors */
+    .card-python { --card-color: #3776AB; }
+    .card-c { --card-color: #555555; }
+    .card-cpp { --card-color: #00599C; }
+    .card-rust { --card-color: #DEA584; }
+    .card-java { --card-color: #B07219; }
+    .card-swift { --card-color: #F05138; }
+    .card-go { --card-color: #00ADD8; }
+
+    /* Media Queries */
+    @media (max-width: 768px) {
+      nav, .subscription-btn, .profile-icon {
+        display: none;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .header-content {
+        justify-content: space-between;
+      }
+      .left-section {
+        flex: 1;
+        justify-content: flex-start;
+      }
+      .logo {
+        order: 0;
+      }
+      .header-separator {
+        display: none;
+      }
+      .right-controls {
+        flex: 1;
+        justify-content: flex-end;
+      }
+      .page-content {
+        padding: 0.5cm 0 0 0.5cm;
+        gap: 0.5cm;
+      }
+      .page-heading {
+        font-size: 1cm; /* 1cm in mobile */
+        line-height: 1cm;
+        letter-spacing: 2px;
+        text-align: left;
+      }
+      .cards-container {
+        flex-direction: column;
+        gap: 0.8cm;
+      }
+      .card {
+        width: calc(90% * 1.1);
+        max-width: 320px;
+        height: 180px;
+        margin-left: 0.5cm; /* Slight left shift */
+      }
+      .card-subheading {
+        font-size: 16px;
+      }
+      .card-description {
+        font-size: 11px;
+      }
+      .card-symbol {
+        font-size: 25px;
+        top: 8px;
+        right: 8px;
+      }
+      hr.separator {
+        width: calc(100% - 0.5cm); /* Adjust for left padding in mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="left-section">
+        <div class="logo">CodeX</div>
+        <div class="header-separator"></div>
+        <nav>
+          <button>Practice</button>
+          <button>Stats</button>
+          <button>Certification</button>
+          <button>Hackathon</button>
+        </nav>
+      </div>
+      <div class="right-controls">
+        <button class="subscription-btn">👑 Subscription</button>
+        <div class="profile-icon">👤</div>
+        <button class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="menu-overlay"></div>
+
+  <div class="mobile-menu">
+    <div>Practice</div>
+    <div>Stats</div>
+    <div>Certification</div>
+    <div>Hackathon</div>
+    <div>Subscription</div>
+    <div>Profile</div>
+  </div>
+
+  <section class="page-content">
+    <h1 class="page-heading">Programming languages</h1>
+    <hr class="separator">
+    <div class="cards-container">
+      <a href="python.html" class="card-link">
+        <div class="card card-python">
+          <div class="card-symbol">🐍</div>
+          <div class="card-content">
+            <div class="card-subheading">Python</div>
+            <div class="card-description">Versatile language for web, data science, and automation.</div>
+          </div>
+        </div>
+      </a>
+      <a href="c.html" class="card-link">
+        <div class="card card-c">
+          <div class="card-symbol">🔢</div>
+          <div class="card-content">
+            <div class="card-subheading">C</div>
+            <div class="card-description">Low-level language for system programming and performance.</div>
+          </div>
+        </div>
+      </a>
+      <a href="cpp.html" class="card-link">
+        <div class="card card-cpp">
+          <div class="card-symbol">➕</div>
+          <div class="card-content">
+            <div class="card-subheading">C++</div>
+            <div class="card-description">Powerful language for games and high-performance apps.</div>
+          </div>
+        </div>
+      </a>
+      <a href="rust.html" class="card-link">
+        <div class="card card-rust">
+          <div class="card-symbol">🦀</div>
+          <div class="card-content">
+            <div class="card-subheading">Rust</div>
+            <div class="card-description">Safe and fast language for systems programming.</div>
+          </div>
+        </div>
+      </a>
+      <a href="java.html" class="card-link">
+        <div class="card card-java">
+          <div class="card-symbol">☕</div>
+          <div class="card-content">
+            <div class="card-subheading">Java</div>
+            <div class="card-description">Robust language for enterprise and Android apps.</div>
+          </div>
+        </div>
+      </a>
+      <a href="swift.html" class="card-link">
+        <div class="card card-swift">
+          <div class="card-symbol">🐦</div>
+          <div class="card-content">
+            <div class="card-subheading">Swift</div>
+            <div class="card-description">Modern language for iOS and macOS apps.</div>
+          </div>
+        </div>
+      </a>
+      <a href="go.html" class="card-link">
+        <div class="card card-go">
+          <div class="card-symbol">🐹</div>
+          <div class="card-content">
+            <div class="card-subheading">Go</div>
+            <div class="card-description">Simple language for scalable cloud applications.</div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggleBtn = document.querySelector(".menu-toggle");
+      const mobileMenu = document.querySelector(".mobile-menu");
+      const overlay = document.querySelector(".menu-overlay");
+
+      function closeMenu() {
+        mobileMenu.classList.remove("show");
+        overlay.style.display = "none";
+      }
+
+      toggleBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("show");
+        overlay.style.display = mobileMenu.classList.contains("show") ? "block" : "none";
+      });
+
+      overlay.addEventListener("click", closeMenu);
+
+      document.querySelectorAll(".mobile-menu div").forEach(item => {
+        item.addEventListener("click", closeMenu);
+      });
+    });
+  </script>
+</body>
+</html>

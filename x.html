@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeX</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: #000;
+      color: white;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 10px;
+      overflow: hidden;
+    }
+
+    .gradient-text {
+      font-size: 5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b, #ffeb3b, #2196f3);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientFlow 8s ease infinite;
+      margin-bottom: 0.8rem;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .subheading {
+      font-size: 1rem;
+      margin-bottom: 1cm;
+      letter-spacing: 3px;
+      color: #f1f1f1;
+    }
+
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5cm;
+      width: 100%;
+      max-width: 220px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn {
+      background: white;
+      color: black;
+      padding: 10px 0;
+      border: none;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.2);
+      width: 100%;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background: #ffeb3b;
+      color: black;
+    }
+
+    /* Mobile view adjustments */
+    @media (max-width: 600px) {
+      body {
+        justify-content: center;
+        height: 100vh;
+        padding: 0 15px;
+        transform: translateY(-1.5cm);
+      }
+      .gradient-text { font-size: 4.6rem; margin-bottom: 0.7rem; }
+      .btn { font-size: 0.8rem; padding: 8px 0; width: 85%; }
+      .subheading { font-size: 0.9rem; margin-bottom: 0.8cm; }
+      .btn-container { max-width: 180px; gap: 0.5cm; }
+    }
+
+    /* Large screens */
+    @media (min-width: 1024px) {
+      .gradient-text { font-size: 6.5rem; }
+      .btn-container { max-width: 200px; }
+    }
+  </style>
+</head>
+<body>
+  <h1 class="gradient-text">CodeX</h1>
+  <div class="subheading">Learn • Practice • Lead</div>
+
+  <div class="btn-container">
+    <button class="btn" onclick="window.location.href='signup.html'">Sign Up</button>
+    <button class="btn" onclick="window.location.href='login.html'">Sign In</button>
+  </div>
+</body>
+</html>

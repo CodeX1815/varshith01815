@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;font-family:"Poppins",sans-serif;background:#000;color:#fff;display:flex;justify-content:center;align-items:center;height:100vh;}
+    .container{background:#111;padding:1.2rem;border-radius:14px;text-align:center;width:90%;max-width:320px;box-shadow:0 0 15px rgba(255,255,255,0.08);}
+    h2{margin-bottom:1rem;font-size:1.4rem;font-weight:600;}
+    input{width:80%;padding:8px;margin:6px 0;border:none;border-radius:8px;font-size:0.9rem;}
+    button{width:80%;padding:10px;margin-top:12px;border:none;border-radius:50px;background:#fff;color:#000;font-weight:600;cursor:pointer;transition:all 0.3s ease;}
+    button:hover{background:#ffeb3b;}
+    button:active{transform:scale(1.05);}
+    .separator{display:flex;align-items:center;text-align:center;margin:16px 0;font-size:0.9rem;}
+    .separator::before,.separator::after{content:"";flex:1;border-bottom:1px solid #444;}
+    .separator:not(:empty)::before{margin-right:.75em;}
+    .separator:not(:empty)::after{margin-left:.75em;}
+    .link{margin-top:12px;font-size:0.85rem;}
+    .link a{color:#ffeb3b;text-decoration:none;font-weight:600;}
+    .link a:hover{text-decoration:underline;}
+    .forgot{width:80%;text-align:left;margin:6px auto 2px;font-size:0.8rem;color:#aaa;}
+    .forgot a{color:#aaa;text-decoration:none;font-weight:400;}
+    .forgot a:hover{text-decoration:underline;}
+    .message{margin-top:8px;font-size:0.85rem;min-height:1.2em;}
+    @media(max-width:480px){.container{padding:1rem;}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Sign In</h2>
+    <form id="signinForm">
+      <input type="email" id="signinEmail" placeholder="Email" required>
+      <input type="password" id="signinPassword" placeholder="Password" required>
+      <div class="forgot"><a href="#" id="forgotPassword">Forgot password?</a></div>
+      <div class="message" id="forgotMsg"></div>
+      <button type="submit">Sign In</button>
+      <div class="message" id="signinMsg"></div>
+    </form>
+    <div class="separator">OR</div>
+    <button id="googleSignin">Sign In with Google</button>
+    <div class="message" id="googleMsg"></div>
+    <div class="link">Don't have an account? <a href="signup.html">Register</a></div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-analytics.js";
+    import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDyWILsGSUHkKFWJuYqzygVrSldgif5XLA",
+      authDomain: "codex-cf256.firebaseapp.com",
+      projectId: "codex-cf256",
+      storageBucket: "codex-cf256.firebasestorage.app",
+      messagingSenderId: "702124040393",
+      appId: "1:702124040393:web:5be6e4856003b438516d18",
+      measurementId: "G-4KFV1NBFTC"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    const signinForm = document.getElementById("signinForm");
+    const signinMsg = document.getElementById("signinMsg");
+    const googleMsg = document.getElementById("googleMsg");
+    const forgotMsg = document.getElementById("forgotMsg");
+
+    // Email/Password login with verification check
+    signinForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      signinMsg.textContent = "";
+      const email = document.getElementById("signinEmail").value;
+      const password = document.getElementById("signinPassword").value;
+
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        if (user.emailVerified) {
+          signinMsg.style.color = "green";
+          signinMsg.textContent = "Login successful! Redirecting...";
+          setTimeout(() => {
+            window.location.href = "learn.html";
+          }, 1200);
+        } else {
+          signinMsg.style.color = "red";
+          signinMsg.textContent = "Please verify your email before logging in. (Check inbox or spam folder)";
+          auth.signOut();
+        }
+
+      } catch (error) {
+        signinMsg.style.color = "red";
+        signinMsg.textContent = error.message;
+      }
+    });
+
+    // Google login
+    document.getElementById("googleSignin").addEventListener("click", async () => {
+      googleMsg.textContent = "";
+      try {
+        await signInWithPopup(auth, provider);
+        googleMsg.style.color = "green";
+        googleMsg.textContent = "Google Sign In Successful! Redirecting...";
+        setTimeout(() => {
+          window.location.href = "learn.html";
+        }, 1200);
+      } catch (error) {
+        googleMsg.style.color = "red";
+        googleMsg.textContent = error.message;
+      }
+    });
+
+    // Forgot password
+    document.getElementById("forgotPassword").addEventListener("click", async (e) => {
+      e.preventDefault();
+      forgotMsg.textContent = "";
+      const email = document.getElementById("signinEmail").value;
+
+      if (!email) {
+        forgotMsg.style.color = "red";
+        forgotMsg.textContent = "Please enter your email above to reset your password.";
+        return;
+      }
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+        forgotMsg.style.color = "green";
+        forgotMsg.textContent = "Password reset email sent! Check your inbox or spam folder.";
+      } catch (error) {
+        forgotMsg.style.color = "red";
+        forgotMsg.textContent = error.message;
+      }
+    });
+  </script>
+</body>
+</html>

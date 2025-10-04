@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practice - CodeX</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Montserrat',sans-serif;background:black;color:white;overflow-x:hidden;position:relative;}
+body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(circle,rgba(255,255,255,0.2) 1px,transparent 1px);background-size:20px 20px;opacity:0.5;animation:floatGrid 20s linear infinite;z-index:-1;}
+@keyframes floatGrid{0%{transform:translate(0,0);}50%{transform:translate(10px,10px);}100%{transform:translate(0,0);}}
+
+header{display:flex;justify-content:space-between;align-items:center;background:black;padding:22px 30px;position:relative;z-index:10;}
+.header-content{display:flex;align-items:center;justify-content:space-between;width:100%;}
+.left-section{display:flex;align-items:center;gap:20px;}
+.logo{font-size:32px;font-weight:700;background:linear-gradient(90deg,#00ff87,#60efff,#ff6ec4,#7873f5);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:floatGradient 5s linear infinite;}
+@keyframes floatGradient{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+.header-separator{width:2px;height:32px;background:#76B900;}
+nav{display:flex;gap:1cm;}
+nav button,.subscription-btn{background:white;color:black;border:none;border-radius:20px;padding:10px 0;font-size:15px;width:130px;cursor:pointer;text-align:center;transition:0.2s;}
+nav button:hover,.subscription-btn:hover{background:#f0f0f0;transform:scale(1.05);}
+.subscription-btn{background:#FFA500;font-weight:bold;}
+.subscription-btn:active{transform:scale(1.1);}
+.right-controls{display:flex;align-items:center;gap:15px;}
+.profile-icon{font-size:22px;color:white;cursor:pointer;transition:0.2s;}
+.profile-icon:hover{color:#00ff87;transform:scale(1.1);}
+.menu-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;z-index:20;}
+.menu-toggle span{width:25px;height:3px;background:white;border-radius:2px;transition:0.3s;}
+.menu-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:15;}
+.mobile-menu{display:none;flex-direction:column;background:black;width:35%;height:35vh;position:fixed;top:-35vh;right:0;z-index:20;transition:top 0.4s ease-in-out;color:white;padding:20px 10px;}
+.mobile-menu.show{display:flex;top:0;}
+.mobile-menu div{padding:12px;text-align:left;font-size:16px;border-bottom:1px solid #333;cursor:pointer;}
+
+.page-content{padding:1cm 1cm 0 1cm;display:flex;flex-direction:column;gap:1cm;align-items:center;max-width:1200px;margin:0 auto;width:100%;}
+.page-heading{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.5cm;line-height:1.5cm;letter-spacing:3px;margin-bottom:0.5cm;background:linear-gradient(90deg,#FFA500,#FF4500,#FFD700,#FF8C00);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:floatGradient 5s linear infinite;text-align:center;}
+
+.partners-section{display:flex;flex-direction:column;gap:0.5cm;width:100%;min-height:6cm;}
+.partners-heading{font-family:'Montserrat',sans-serif;font-size:24px;font-weight:700;text-align:center;color:white;margin-bottom:1.5cm;}
+.partners-logos{display:flex;justify-content:center;gap:2cm;width:100%;}
+.partner-logo{width:200px;height:auto;border-radius:10px;transition:0.3s;cursor:pointer;filter:brightness(1.1);}
+.partner-logo.hackerrank{box-shadow:0 4px 12px rgba(255,215,0,0.6);}
+.partner-logo.leetcode{box-shadow:0 4px 12px rgba(255,165,0,0.4);}
+.partner-logo:hover{transform:scale(1.05);}
+.partner-logo.hackerrank:hover{box-shadow:0 6px 15px rgba(255,215,0,0.8);}
+.partner-logo.leetcode:hover{box-shadow:0 6px 15px rgba(255,165,0,0.6);}
+.separator{width:80%;height:1px;background:linear-gradient(to right,transparent,#FFD700,transparent);margin:0.5cm auto;}
+
+.search-section{display:flex;flex-direction:column;align-items:center;width:100%;min-height:6cm;gap:0.7cm;}
+.search-heading{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:700;color:white;text-align:center;}
+.search-box{width:100%;max-width:600px;display:flex;border:2px solid #FFA500;border-radius:30px;overflow:hidden;box-shadow:0 4px 12px rgba(255,165,0,0.3);background:#222;}
+.search-input{flex:1;padding:12px 15px;border:none;font-size:16px;outline:none;background:transparent;color:white;}
+.search-input::placeholder{color:#aaa;}
+.search-button{background:#FFA500;color:black;border:none;padding:12px 20px;cursor:pointer;font-weight:bold;transition:0.2s;position:relative;}
+.search-button:hover{background:#FF8C00;transform:scale(1.02);}
+.search-note{font-size:14px;color:#aaa;margin-top:5px;}
+
+.empty-space{height:2cm;width:100%;}
+
+.suggestions{position:relative;width:100%;max-width:600px;}
+.suggestions-list{position:absolute;top:calc(100% + 5px);left:0;width:100%;background:#222;border:1px solid #FFA500;border-radius:8px;overflow:hidden;max-height:200px;z-index:10;display:none;}
+.suggestions-list div{padding:8px 15px;cursor:pointer;color:white;}
+.suggestions-list div:hover{background:#FFA500;color:black;}
+
+@media(max-width:768px){
+nav,.subscription-btn,.profile-icon{display:none;}
+.menu-toggle{display:flex;}
+.left-section{flex:1;justify-content:flex-start;}
+.header-separator{display:none;}
+.right-controls{flex:1;justify-content:flex-end;}
+.page-content{padding:0.5cm 0.5cm 0 0.5cm;gap:0.6cm;}
+.page-heading{font-size:1.2cm;line-height:1.2cm;letter-spacing:2px;}
+.partners-heading{margin-bottom:0.6cm;}
+.partners-logos{flex-direction:column;align-items:center;gap:0.5cm;}
+.partner-logo{width:150px;}
+.search-section{gap:0.7cm;}
+.search-box{width:100%;max-width:none;}
+.search-button{padding:12px 15px;}
+.search-note{margin-top:3px;}
+.empty-space{height:1.5cm;}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <div class="left-section">
+      <div class="logo">CodeX</div>
+      <div class="header-separator"></div>
+      <nav>
+        <button onclick="location.href='learn.html'">Learn</button>
+        <button onclick="location.href='practice.html'">Practice</button>
+        <button onclick="location.href='contactus.html'">Certification</button>
+        <button onclick="location.href='hackathon.html'">Hackathon</button>
+      </nav>
+    </div>
+    <div class="right-controls">
+      <button class="subscription-btn" onclick="location.href='subscription.html'">👑 Subscription</button>
+      <div class="profile-icon" onclick="location.href='profile.html'">👤</div>
+      <button class="menu-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="menu-overlay"></div>
+<div class="mobile-menu">
+  <div onclick="location.href='learn.html'">Learn</div>
+  <div onclick="location.href='practice.html'">Practice</div>
+  <div onclick="location.href='contactus.html'">Certification</div>
+  <div onclick="location.href='hackathon.html'">Hackathon</div>
+  <div onclick="location.href='subscription.html'">Subscription</div>
+  <div onclick="location.href='profile.html'">Profile</div>
+</div>
+
+<section class="page-content">
+  <h1 class="page-heading">CodeX</h1>
+  <div class="partners-section">
+    <h2 class="partners-heading">Our Coding Partners</h2>
+    <div class="partners-logos">
+      <img src="https://freshershunt.in/wp-content/uploads/2023/10/HackerRank.png" class="partner-logo hackerrank">
+      <img src="https://workablehr.s3.amazonaws.com/uploads/account/open_graph_logo/604858/social?1687549873000" class="partner-logo leetcode">
+    </div>
+  </div>
+  <div class="separator"></div>
+
+  <div class="search-section">
+    <h3 class="search-heading">Search CodeX Courses</h3>
+    <div class="suggestions">
+      <div class="search-box">
+        <input type="text" class="search-input" placeholder="Type course name...">
+        <button class="search-button">Search</button>
+      </div>
+      <div class="suggestions-list"></div>
+    </div>
+    <div class="search-note">Search only CodeX courses to practice</div>
+  </div>
+  <div class="empty-space"></div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+  const toggleBtn=document.querySelector(".menu-toggle");
+  const mobileMenu=document.querySelector(".mobile-menu");
+  const overlay=document.querySelector(".menu-overlay");
+  toggleBtn.addEventListener("click",()=>{
+    mobileMenu.classList.toggle("show");
+    overlay.style.display=mobileMenu.classList.contains("show")?"block":"none";
+  });
+  overlay.addEventListener("click",()=>{mobileMenu.classList.remove("show");overlay.style.display="none";});
+  document.querySelectorAll(".mobile-menu div").forEach(item=>{item.addEventListener("click",()=>{mobileMenu.classList.remove("show");overlay.style.display="none";});});
+
+  const courses = {
+    "algorithms":"https://www.hackerrank.com/domains/algorithms",
+    "python":"https://www.hackerrank.com/domains/python",
+    "data structures":"https://www.hackerrank.com/domains/data-structures",
+    "c":"https://www.hackerrank.com/domains/c",
+    "c++":"https://www.hackerrank.com/domains/c++",
+    "ruby":"https://www.hackerrank.com/domains/ruby",
+    "java":"https://www.hackerrank.com/domains/java",
+    "sql":"https://www.hackerrank.com/domains/sql",
+    "swift":"https://exercism.org/tracks/swift",
+    "go":"https://exercism.org/tracks/go",
+    "rust":"https://exercism.org/tracks/rust",
+    "regex":"https://www.hackerrank.com/domains/regex",
+    "database":"https://www.hackerrank.com/domains/data-base",
+    "functional programming":"https://www.hackerrank.com/domains/functional-programming",
+    "mathematics":"https://www.hackerrank.com/domains/mathematics",
+    "html":"https://www.frontendmentor.io/",
+    "css":"https://www.frontendmentor.io/",
+    "javascript/js":"https://exercism.org/tracks/javascript",
+    "node.js":"https://www.freecodecamp.org/",
+    "django":"https://www.freecodecamp.org/",
+    "flask":"https://www.freecodecamp.org/",
+    "fastapi":"https://www.freecodecamp.org/",
+
+    // ✅ New ones added
+    "mysql":"https://www.w3schools.com/mysql/mysql_exercises.asp",
+    "aws":"https://skillbuilder.aws/",
+    "gcp":"https://www.cloudskillsboost.google/",
+    "azure":"https://cloudlabs.ai",
+    "blockchain":"https://web3coda.com/",
+    "machine learning":"https://developers.google.com/machine-learning/crash-course/exercises",
+    "artificial intelligence":"https://skillbuilder.aws/"
+  };
+
+  const input=document.querySelector(".search-input");
+  const suggestionsList=document.querySelector(".suggestions-list");
+  const searchButton=document.querySelector(".search-button");
+
+  function updateSuggestions(){
+    const val=input.value.toLowerCase();
+    suggestionsList.innerHTML="";
+    if(val===""){suggestionsList.style.display="none";return;}
+    let matches=Object.keys(courses).filter(k=>k.includes(val));
+    matches.forEach(m=>{
+      let div=document.createElement("div");
+      div.textContent=m;
+      div.addEventListener("click",()=>{window.location.href=courses[m];});
+      suggestionsList.appendChild(div);
+    });
+    suggestionsList.style.display=matches.length?"block":"none";
+  }
+
+  input.addEventListener("input",updateSuggestions);
+  input.addEventListener("keypress",function(e){
+    if(e.key==="Enter"){
+      let val=input.value.toLowerCase();
+      if(courses[val]){window.location.href=courses[val];}
+    }
+  });
+  searchButton.addEventListener("click",function(){
+    let val=input.value.toLowerCase();
+    if(courses[val]){window.location.href=courses[val];}
+  });
+});
+</script>
+
+</body>
+</html>

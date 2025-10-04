@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeX</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+<style>
+body { margin:0; font-family:Arial,sans-serif; background:white; color:black; }
+header { display:flex; justify-content:space-between; align-items:center; background:black; padding:22px 30px; position:relative; z-index:10; }
+.header-content { display:flex; align-items:center; justify-content:space-between; width:100%; }
+.left-section { display:flex; align-items:center; gap:20px; }
+.logo { font-size:32px; font-weight:600; background: linear-gradient(90deg, #00ff87, #60efff, #ff6ec4, #7873f5); background-size:300% 300%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:floatGradient 5s infinite linear; }
+@keyframes floatGradient {0% {background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+.header-separator { width:2px; height:32px; background-color:#76B900; }
+nav { display:flex; gap:1cm; }
+nav button, .subscription-btn { background:white; color:black; border:none; border-radius:20px; padding:10px 0; cursor:pointer; font-size:15px; width:130px; text-align:center; transition:all 0.2s ease; }
+nav button:hover, .subscription-btn:hover { transform:scale(1.05); background:#f0f0f0; }
+.subscription-btn { background-color:#FFA500; font-weight:bold; }
+.subscription-btn:active { transform:scale(1.1); }
+.right-controls { display:flex; align-items:center; gap:15px; }
+.profile-icon { font-size:22px; color:white; cursor:pointer; transition:0.2s ease; }
+.profile-icon:hover { transform:scale(1.1); color:#00ff87; }
+.menu-toggle { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; z-index:20; }
+.menu-toggle span { width:25px; height:3px; background:white; border-radius:2px; transition:0.3s; }
+.menu-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:15; }
+.mobile-menu { display:none; flex-direction:column; background:black; width:35%; height:35vh; position:fixed; top:-35vh; right:0; z-index:20; transition:top 0.4s ease-in-out; color:white; padding:20px 10px; }
+.mobile-menu.show { display:flex; top:0; }
+.mobile-menu div { padding:12px; text-align:left; font-size:16px; border-bottom:1px solid #333; cursor:pointer; }
+
+/* Explore Section */
+.page-content { padding:1cm 0 0 1cm; display:flex; flex-direction:column; gap:0.5cm; }
+.page-heading { font-family:'Poppins',sans-serif; font-weight:700; font-size:1.5cm; line-height:1.5cm; letter-spacing:3px; margin: 10px 0 5px 0; }
+
+/* Black separator under Explore */
+.separator {
+  background:black;
+  height:2px;
+  width:97%;
+  max-width: 14000px;
+  margin: 5px auto 10px auto;
+}
+
+.cards-container { display:flex; flex-wrap:wrap; gap:0.6cm; margin-top:5px; }
+.card { width:350px; height:200px; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.2); cursor:pointer; transition:transform 0.3s ease; position:relative; overflow:hidden; }
+.card:hover { transform:scale(1.1); }
+.card-subheading { position:absolute; bottom:15px; left:15px; font-family:'Calibri',Arial,sans-serif; font-weight:800; font-size:18px; color:black; }
+
+/* Responsive */
+@media (max-width:768px) {
+  nav, .subscription-btn, .profile-icon { display:none; }
+  .menu-toggle { display:flex; }
+  .header-content { justify-content:space-between; }
+  .left-section { flex:1; justify-content:flex-start; }
+  .logo { order:0; }
+  .header-separator { display:none; }
+  .right-controls { flex:1; justify-content:flex-end; }
+  .page-content { padding:0.5cm 0 0 0.5cm; gap:0.4cm; }
+  .page-heading { font-size:1.3cm; line-height:1.3cm; letter-spacing:2px; text-align:left; margin: 8px 0 4px 0; }
+  .separator { margin: 4px auto 8px auto; width:85%; }
+  .cards-container { flex-direction:column; gap:0.6cm; margin-top:4px; }
+  .card { width:calc(90% * 1.1); max-width:320px; height:180px; margin-left:0.5cm; }
+  .card-subheading { font-size:16px; bottom:10px; left:10px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <div class="left-section">
+      <div class="logo">CodeX</div>
+      <div class="header-separator"></div>
+      <nav>
+        <button onclick="location.href='learn.html'">Learn</button>
+        <button onclick="location.href='practice.html'">Practice</button>
+        <button onclick="location.href='contactus.html'">Certification</button>
+        <button onclick="location.href='hackathon.html'">Hackathon</button>
+      </nav>
+    </div>
+    <div class="right-controls">
+      <button class="subscription-btn" onclick="location.href='subscription.html'">👑 Subscription</button>
+      <div class="profile-icon" onclick="location.href='profile.html'">👤</div>
+      <button class="menu-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu-overlay"></div>
+<div class="mobile-menu">
+  <div onclick="location.href='learn.html'">Learn</div>
+  <div onclick="location.href='practice.html'">Practice</div>
+  <div onclick="location.href='contactus.html'">Certification</div>
+  <div onclick="location.href='hackathon.html'">Hackathon</div>
+  <div onclick="location.href='subscription.html'">Subscription</div>
+  <div onclick="location.href='profile.html'">Profile</div>
+</div>
+
+<section class="page-content">
+  <h1 class="page-heading">Explore</h1>
+  <div class="separator"></div>
+  <div class="cards-container">
+    <div class="card" onclick="location.href='pl.html'" style="background:linear-gradient(to bottom,transparent 65%,white 35%), url('https://wallpaper.dog/large/20518452.jpg') no-repeat center center/contain;">
+      <div class="card-subheading">Programming languages</div>
+    </div>
+    <div class="card" onclick="location.href='bc.html'" style="background:linear-gradient(to bottom,transparent 65%,white 35%), url('https://static.vecteezy.com/system/resources/previews/000/130/806/non_2x/vector-nanotechnology-virtual-abstract-background.jpg') no-repeat center center/contain;">
+      <div class="card-subheading">Beginner courses</div>
+    </div>
+    <div class="card" onclick="location.href='fe.html'" style="background:linear-gradient(to bottom,transparent 65%,white 35%), url('data:image/webp;base64,UklGRjQJAABXRUJQVlA4ICgJAADQOwCdASqBAfsAPp1OpE0lpCOlohFIwLATiWVu7tFVs8y8kUwDzz9Z40yG3e/+A7nT+noe7v2FCe7e40nL7px7gPzHeEB2Bf9k/t3Wyeg75bP7d/DV+3npgRcZzL2/zFbL/oPzdLnnkccXpw3JuTcm5Nybk3JuTcm5Nybk3JuTcm5O9ZuzdmwcCsHV+MN5grrnWyI5LnkvKlMMYYuzZ5mkNyLDGexmTjKOv4VV/ok2mE9+xV5dDOBgHdgiBjDN/YEnkfs8r9c23YVZsvJ5roIuPcuMGg2NKXvCtvsOyk3JvC29oM3eKuW6RWOZd0laY7PfoPVzx+qqFzeUvfQT5t/EVsAs6bzyXkhh9s8XL9u/WZGcY/kTpyU2/AFEDsJ9y2Tng2runUfJkG+3OYu6JPKlMMYYX7hq+oeBzCD5qRBm5/39ysKt0OGQN/Q8AKngpg4fgxuWdCugdA5bA3ObFNTpYk3F+XEiTVyprYgtVHxzS0onijimISmHb7lml5MfGJMSYug9YjG9KtMHXRJrtXqHSzilBHchqbU4f7N2bs3ZywV+zdm9VBuDcG4Nwbg3BuD07mvthlDWUNZQ1lDWUNZQ1sQQghBCCEEIIQQgkV4Nwbg3BuDcG4NwipUeEma4Tl8o+CG/dfj4AP7+Aa9xWkoykH/x7Pwu+F3bQAHTmAAAeybOBVcyMTG6cBxUes+OjoJ6kSvPDNRI8hYxp0ngpmKxG0FXWzXTTJsrOV1jDvyeYdygYigABR8WSQzgAD9DhyfXwBnF/TWyQK+s6P/agViR892ApFJiCe/dhGT+iuUKetL6N2k+gLbkvHjxB0uSXCIiPGn0BMaSyhlJVHbso3T4yjuOwByytAhhWE1uNIbyykqjd8naKqI4qtyVROT4z8Zgr1l4u+Ma+zYVD/bmSoecHX0Ef9r+h+dMIY/fULOM8m9BQLn911BNT207tXhJgsnfZC2KX6fcS2UoTW9B2a1y6uWq/e6j0L4potOvalP+nhqi6HGRHjmaawOfGHeyW0pEUVCpXdvOKzChh680FM841rOLDVUEq2RDV0BBWECRVa3zcQzxNjgZBdPII/xJ9bwAVrOfSmVbVz8lyv7Jgwb/audPsf9wbPibg+Go4sct/fwnmKqqDTvpOiDqlQh9ws2fYd5j3CKwGzkk4xYW+JXW+Fcrt+wRnxUpozt01tWrpfOmyz2OUr7Mpnd+MGRZUE9T53uL0E1VS74AojPgOl7q30G8maC+r+b4aUMb6KSuZimUr7T5wyQ+nnZwePZRS5SyuT8AjRkd9XQuQbkquHOII7r/TViiK5keS4UUx/FSnoWBAX/daRCaUcWfZ4d88pc2PTL6ottLKZMRPLgGSzRLglmz5FEDGrZSLx/++TKi9f8ESLhGVqYNqtImbeTif34j/atrm/F8JN0GAJnRxCmD9aPHxVjSbrRcBX3kpeT0p1bOWG6WJNkz8ChFxzh7raga9A6j55mlvxVn3NNDxvrCucgQBo0/tllAGN9Twq6S9FCNO78rPlNyPBtEAbkztfSn0JEvpMhmzEG4dR/ihZj10573Bg8H0vpPIafH11wRyaQPNd9ctPgOn7WYuM+oCyNNeO65gzw0miDrfJTXwozY/NT1WsYxpQ6xOOXnf5zL/VzJbAoyf6McRAoVDjdDBwxinRZPf6qPQPebI3/A6R6b7LNfyp5YcoLM/QCQGetILD36sAgFgd99zj6rW/+AjzOYldKy3a1tVWhdr2u5a3xZuQldrOwH1HRR0IH9G8O0lSX6SpE1LmUCQ0h4JtMr0R9giAfQFm4O0yzCKAegdsLkgJj71LjJ52dUgfREAU6Ev/Z9lmkml3Zvs55q7HfpFIk9Lvda7sJ8TQXm8tyT14L6G50/WIdYk81J5IBp2IAZvVrZ8XIJHwj0SZHwcQu8zy8zX43uKkWiUE0CFiSiMR5/gp0MBTOTksY7zbdNW6/LOTB2nuM08FpZbx/tkuI6rIqJiuE2pzmXr95s4ujM3zONFVgsWWo12Oli68blClpjJo7C5x/U8WPjsuo1Ad+swOn3wUxVcJ09ajz2TkO1z1t8hvYNwn+1WAnMW802lDVxfVMT6df/1xb5i7I132soSIF2XBBFcswAoLZGASI8QvtJ2vWE8X0LIhHZ2MakL09wG6Wt/v9/MfCRVMFtLbGs7G9e3n26ZmtVUzeh1AP1WTxQa/8Jag5lkfNxqzT4MBwakjdegSvbd1dGuxKbEiz/4ecyLu19v7dcYV9iI2YFDbHf4Pmn3WPs3MSYJ6tMQfKkiMRRf1twGgQSWgzTSRCwsz+wr8mcIxDpT8tQKKIzSfdh7aox/9U9cCG6s1CAbAnS02JHNuMP/T/gc/6l2AbSd16H/H/FTeSy1Rlmb5PYI2GRVT6ivmQiJ2x/nBJ6vOe1b+ha9n+jvp86jukbaIJPf9eNwKHbboGtA8J4kv/uTf2Kw3ILsT3W4viANCTmeD8meIVGzr4Fdhy7ccgHXuNcZaDn0TuCFgoRESFcmjN0s0gnxGlQvMKfTIZCVuoo5RGjkLgGjtZzB1yURoxACnMqaIwvHoA6xG4c0H1Gz43+aPx/iQK7/zgoMOXzMy27P7RW5L1uGZw248KE1jlo2g+BYa6gP1cE8zxNuV/esncPnNIAOW8Onwd0cvbHF2r4sBF7M3jJAm2soM7ijnzPlNtKlwIZbh0s3CtRS5s9koGTsLjXKtzTNMVX6mXB1W+yKga8k2IrIc/ozMZdu0kjueHc4VAN7aITz7+pGWXkKPITqHP3Uf8OSkqhZbykeaLnY7y1fpidEeL/N1Kiffu5/NDGFKv6HLbL3yMFP1VcueM+OzN0faejXKnjitCdxTzaKgjAkxDdgymt4OwZMS8D/wyEjgnVli1zoimg0LOLTIZRRX3C/bng45o0z41PcWSj8yLc+w7SDEoDlVv6AF5pVyj5Z4AJLJ5s5eQneT/3QUdhQBwX7z1uGjJmqsoH2bV2kSkZ/0Fbm5u3EqSQFQN5OzVesglq7AYvdWUF8QK6BMghnWKzR1ubkllLosB8Z3HwL/sIOW6dv9UN5PoEOrIIqc1xlxMnn+RAwqADRg0666JsiW3umEYAX8KP44BCjgAAAAAGHkbOGuAAAAAA') no-repeat center center/contain;">
+      <div class="card-subheading">Frontend</div>
+    </div>
+    <div class="card" onclick="location.href='be.html'" style="background:linear-gradient(to bottom,transparent 65%,white 35%), url('https://th.bing.com/th/id/OIP.t249ID8TcQsLPmSdbt6TWQHaEK?o=7&cb=12rm=3&rs=1&pid=ImgDetMain&o=7&rm=3') no-repeat center center/contain;">
+      <div class="card-subheading">Backend</div>
+    </div>
+    <div class="card" onclick="location.href='cc.html'" style="background:linear-gradient(to bottom,transparent 65%,white 35%), url('https://image.freepik.com/free-vector/cloud-computing-concept-abstract-cloud-connection-technology-background_43778-489.jpg') no-repeat center center/contain;">
+      <div class="card-subheading">Cloud Computing</div>
+    </div>
+    <div class="card" onclick="location.href='btc.html'" style="background:linear-gradient(to bottom,transparent 65%,white 35%), url('https://th.bing.com/th/id/OIP.UJCFmFuv2SCYtSrng1qFFQHaEK?w=265&h=180&c=7&r=0&o=7&cb=12&dpr=1.4&pid=1.7&rm=3') no-repeat center center/contain;">
+      <div class="card-subheading">Blockchain</div>
+    </div>
+    <div class="card" onclick="location.href='AI.html'" style="background:linear-gradient(to bottom,transparent 65%,white 35%), url('https://th.bing.com/th/id/OIP.UHbDZBOo2gox_16AAi0tLgHaDV?o=7&cb=12rm=3&rs=1&pid=ImgDetMain&o=7&rm=3') no-repeat center center/contain;">
+      <div class="card-subheading">Artificial intelligence</div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.querySelector(".menu-toggle");
+  const mobileMenu = document.querySelector(".mobile-menu");
+  const overlay = document.querySelector(".menu-overlay");
+  if (toggleBtn && mobileMenu && overlay) {
+    toggleBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("show");
+      overlay.style.display = mobileMenu.classList.contains("show") ? "block" : "none";
+    });
+    overlay.addEventListener("click", () => {
+      mobileMenu.classList.remove("show");
+      overlay.style.display = "none";
+    });
+    document.querySelectorAll(".mobile-menu div").forEach(item => {
+      item.addEventListener("click", () => {
+        mobileMenu.classList.remove("show");
+        overlay.style.display = "none";
+      });
+    });
+  }
+});
+</script>
+
+</body>
+</html>

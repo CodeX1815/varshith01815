@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+<style>
+body { margin:0; font-family:Arial,sans-serif; background:#2e2e2e; color:white; overflow-x:hidden; }
+
+/* ===== Header ===== */
+header { display:flex; justify-content:space-between; align-items:center; background:black; padding:22px 30px; position:sticky; top:0; z-index:100; }
+.header-content { display:flex; align-items:center; justify-content:space-between; width:100%; }
+.left-section { display:flex; align-items:center; gap:20px; }
+.logo { font-size:32px; font-weight:600; background: linear-gradient(90deg, #00ff87, #60efff, #ff6ec4, #7873f5); background-size:300% 300%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:floatGradient 5s infinite linear; }
+@keyframes floatGradient {0% {background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+.header-separator { width:2px; height:32px; background-color:#76B900; }
+nav { display:flex; gap:1cm; }
+nav button, .subscription-btn { background:white; color:black; border:none; border-radius:20px; padding:10px 0; cursor:pointer; font-size:15px; width:130px; text-align:center; transition:all 0.2s ease; }
+nav button:hover, .subscription-btn:hover { transform:scale(1.05); background:#f0f0f0; }
+.subscription-btn { background-color:#FFA500; font-weight:bold; }
+.right-controls { display:flex; align-items:center; gap:15px; }
+.profile-icon { font-size:22px; color:white; cursor:pointer; transition:0.2s ease; }
+.profile-icon:hover { transform:scale(1.1); color:#00ff87; }
+.menu-toggle { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; z-index:20; }
+.menu-toggle span { width:25px; height:3px; background:white; border-radius:2px; transition:0.3s; }
+.menu-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:15; }
+.mobile-menu { display:none; flex-direction:column; background:black; width:70%; height:100%; position:fixed; top:0; right:-70%; z-index:20; transition:right 0.4s ease-in-out; color:white; padding:20px 10px; }
+.mobile-menu.show { display:flex; right:0; }
+.mobile-menu div { padding:12px; text-align:left; font-size:16px; border-bottom:1px solid #333; cursor:pointer; }
+
+/* ===== Page Content ===== */
+.page-content { padding:30px; display:flex; flex-direction:column; gap:15px; max-width:1400px; margin:auto; }
+.page-heading { font-family:'Poppins',sans-serif; font-weight:700; font-size:2.8rem; color:white; margin-bottom:10px; align-self:flex-start; }
+.separator { height:3px; width:100%; background:white; border-radius:2px; margin:10px 0; }
+
+/* ===== Video & Code Editor ===== */
+.content-section { display:flex; gap:30px; justify-content:space-between; flex-wrap:nowrap; }
+.video-player { flex:0 0 60%; background:rgba(255,255,255,0.05); backdrop-filter:blur(8px); border-radius:15px; padding:20px; display:flex; justify-content:center; }
+.video-player iframe { width:100%; height:500px; border-radius:12px; border:none; }
+.code-editor { flex:0 0 40%; background:rgba(255,255,255,0.05); backdrop-filter:blur(8px); border-radius:15px; padding:20px; display:flex; justify-content:center; align-items:center; min-height:500px; }
+.code-editor iframe { width:100%; height:100%; border-radius:12px; border:none; }
+.note { font-size:14px; color:#ccc; margin-top:10px; text-align:center; }
+
+/* ===== Responsive ===== */
+@media(max-width:1024px) {
+  .content-section { flex-direction:column; }
+  .video-player, .code-editor { flex:1 1 100%; max-width:100%; }
+  .video-player iframe { height:350px; }
+  .code-editor { min-height:300px; height:300px; }
+  .page-heading { font-size:2.2rem; }
+  .separator { margin:10px 0; }
+}
+
+@media(max-width:768px) {
+  nav, .subscription-btn, .profile-icon { display:none; }
+  .menu-toggle { display:flex; }
+  .content-section { flex-direction:column; gap:10px; }
+  .video-player { flex:1 1 100%; }
+  .video-player iframe { height:200px; width:100%; }
+  .code-editor { flex:1 1 100%; height:calc(100vh - 60px - 200px - 50px); /* full remaining screen under header & video */ padding:0; border-radius:0; }
+  .code-editor iframe { width:100%; height:100%; border-radius:0; }
+  .page-heading { font-size:1.8rem; }
+  .separator { margin:8px 0; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="left-section">
+      <div class="logo">CodeX</div>
+      <div class="header-separator"></div>
+      <nav>
+        <button onclick="location.href='learn.html'">Learn</button>
+        <button onclick="location.href='practice.html'">Practice</button>
+        <button onclick="location.href='contactus.html'">Certification</button>
+        <button onclick="location.href='hackathon.html'">Hackathon</button>
+      </nav>
+    </div>
+    <div class="right-controls">
+      <button class="subscription-btn" onclick="location.href='subscription.html'">👑 Subscription</button>
+      <div class="profile-icon" onclick="location.href='profile.html'">👤</div>
+      <button class="menu-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu-overlay"></div>
+<div class="mobile-menu">
+  <div onclick="location.href='learn.html'">Learn</div>
+  <div onclick="location.href='practice.html'">Practice</div>
+  <div onclick="location.href='contactus.html'">Certification</div>
+  <div onclick="location.href='hackathon.html'">Hackathon</div>
+  <div onclick="location.href='subscription.html'">Subscription</div>
+  <div onclick="location.href='profile.html'">Profile</div>
+</div>
+
+<section class="page-content">
+  <h1 class="page-heading">HTML</h1>
+  <div class="separator"></div>
+
+  <div class="content-section">
+    <!-- Video -->
+    <div class="video-player">
+<iframe 
+      width="560" 
+      height="315" 
+      src="https://www.youtube.com/embed/kUMe1FH4CHE?rel=0&modestbranding=1&playsinline=1" 
+      title="Learn HTML – Full Tutorial for Beginners" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+      referrerpolicy="strict-origin-when-cross-origin" 
+      allowfullscreen>
+</iframe>
+</div>
+
+    <!-- Code Editor -->
+    <div class="code-editor">
+      <iframe src="https://www.jdoodle.com/start-coding" title="Code Editor"></iframe>
+    </div>
+  </div>
+
+  <p class="note">⚠️ Every video is part of a playlist containing more than one video.</p>
+</section>
+
+<script>
+// Mobile menu toggle
+const toggle = document.querySelector('.menu-toggle');
+const mobileMenu = document.querySelector('.mobile-menu');
+const overlay = document.querySelector('.menu-overlay');
+toggle.addEventListener('click', () => {
+  mobileMenu.classList.toggle('show');
+  overlay.style.display = mobileMenu.classList.contains('show') ? 'block' : 'none';
+});
+overlay.addEventListener('click', () => {
+  mobileMenu.classList.remove('show');
+  overlay.style.display = 'none';
+});
+</script>
+
+</body>
+</html>
