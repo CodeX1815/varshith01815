@@ -10,94 +10,331 @@
 <meta http-equiv="Expires" content="0" />
 
 <style>
-body { margin:0; font-family:Arial,sans-serif; background:black; color:white; overflow-x:hidden; }
-header { display:flex; justify-content:space-between; align-items:center; background:black; padding:18px 25px; position:sticky; top:0; z-index:100; }
-.header-content { display:flex; align-items:center; justify-content:space-between; width:100%; }
-.left-section { display:flex; align-items:center; gap:20px; }
-.logo { font-size:28px; font-weight:600; background: linear-gradient(90deg, #00ff87, #60efff, #ff6ec4, #7873f5); background-size:300% 300%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:floatGradient 5s infinite linear; }
-@keyframes floatGradient {0% {background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-nav { display:flex; gap:20px; }
-nav button, .subscription-btn { background:white; color:black; border:none; border-radius:20px; padding:8px 16px; cursor:pointer; font-size:14px; font-weight:600; transition:all 0.2s ease; }
-nav button:hover, .subscription-btn:hover { transform:scale(1.05); background:#f0f0f0; }
-.subscription-btn { background-color:#FFA500; color:black; }
-.right-controls { display:flex; align-items:center; gap:15px; }
-.profile-icon { font-size:22px; cursor:pointer; transition:0.2s; }
-.profile-icon:hover { transform:scale(1.1); color:#00ff87; }
-.menu-toggle { display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; }
-.menu-toggle span { width:25px; height:3px; background:white; border-radius:2px; transition:0.3s; }
-.menu-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:90; }
-.mobile-menu { display:none; flex-direction:column; background:black; width:70%; height:100vh; position:fixed; top:0; right:-70%; z-index:100; transition:right 0.4s ease; padding:80px 20px; }
-.mobile-menu.show { display:flex; right:0; }
-.mobile-menu div { padding:12px; border-bottom:1px solid #333; cursor:pointer; }
-.mobile-menu div:hover { color:#00ff87; padding-left:15px; }
-.page-content { display:flex; flex-direction:column; align-items:center; gap:1rem; padding:40px 20px; min-height:calc(100vh - 80px); }
-.page-heading { font-family:'Poppins',sans-serif; font-size:2rem; font-weight:700; background:linear-gradient(45deg,#00ff87,#60efff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:1rem; }
-.profile-card { background:rgba(255,255,255,0.05); backdrop-filter:blur(15px); border:1px solid rgba(255,255,255,0.1); border-radius:15px; padding:25px; width:100%; max-width:420px; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,0.4); }
-.profile-avatar { width:80px; height:80px; border-radius:50%; background:linear-gradient(45deg,#00ff87,#60efff); display:flex; align-items:center; justify-content:center; font-size:2rem; margin:0 auto 1rem; }
-.profile-form { display:flex; flex-direction:column; gap:15px; text-align:left; }
-.profile-form label { font-weight:600; font-size:14px; color:#00ff87; }
-.profile-form input { padding:12px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.05); color:white; }
-.profile-form input:focus { outline:none; border-color:#00ff87; box-shadow:0 0 8px rgba(0,255,135,0.4); }
-.profile-form button { background:linear-gradient(45deg,#00ff87,#60efff); color:black; border:none; border-radius:10px; padding:12px; font-weight:600; cursor:pointer; }
-.profile-form button:hover { transform:scale(1.05); }
-.success-msg { margin-top:10px; color:#00ff87; font-size:14px; display:none; text-align:center; }
-.separator { margin:20px 0; width:100%; max-width:420px; height:2px; background:white; }
-.signout-btn { width:100%; max-width:420px; padding:12px; border-radius:50px; border:none; background:white; color:black; font-weight:600; cursor:pointer; transition:all 0.3s ease; }
-.signout-btn:hover { transform:scale(1.05); }
-@media(max-width:768px) { nav, .subscription-btn, .profile-icon { display:none; } .menu-toggle { display:flex; } .logo { font-size:22px; } .page-heading { font-size:1.6rem; } }
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: black;
+    color: white;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: black;
+    padding: 22px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+}
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.logo {
+    font-size: 32px;
+    font-weight: 600;
+    background: linear-gradient(90deg, #00ff87, #60efff, #ff6ec4, #7873f5);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: floatGradient 5s infinite linear;
+}
+@keyframes floatGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.header-separator {
+    width: 2px;
+    height: 32px;
+    background-color: #76B900;
+}
+nav {
+    display: flex;
+    gap: 1cm;
+}
+nav button, .subscription-btn {
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 15px;
+    width: 130px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+nav button:hover, .subscription-btn:hover {
+    transform: scale(1.05);
+    background: #f0f0f0;
+}
+.subscription-btn {
+    background-color: #FFA500;
+    font-weight: bold;
+}
+.subscription-btn:active {
+    transform: scale(1.1);
+}
+.right-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.profile-icon {
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.profile-icon:hover {
+    transform: scale(1.1);
+    color: #00ff87;
+}
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 20;
+}
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+.menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 15;
+}
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: black;
+    width: 60%;
+    height: auto;
+    position: fixed;
+    top: -100%;
+    right: 0;
+    z-index: 20;
+    transition: top 0.4s ease-in-out;
+    color: white;
+    padding: 20px 10px;
+    overflow-x: hidden;
+}
+.mobile-menu.show {
+    display: flex;
+    top: 0;
+}
+.mobile-menu div {
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+    border-bottom: 1px solid #333;
+    cursor: pointer;
+}
+.mobile-menu div:hover {
+    color: #00ff87;
+    padding-left: 15px;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 40px 20px;
+    min-height: calc(100vh - 80px);
+    max-width: 100%;
+}
+.page-heading {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #00ff87, #60efff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+.profile-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #00ff87, #60efff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 1rem;
+}
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+}
+.profile-form label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #00ff87;
+}
+.profile-form input {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+}
+.profile-form input:focus {
+    outline: none;
+    border-color: #00ff87;
+    box-shadow: 0 0 8px rgba(0, 255, 135, 0.4);
+}
+.profile-form button {
+    background: linear-gradient(45deg, #00ff87, #60efff);
+    color: black;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.profile-form button:hover {
+    transform: scale(1.05);
+}
+.success-msg {
+    margin-top: 10px;
+    color: #00ff87;
+    font-size: 14px;
+    display: none;
+    text-align: center;
+}
+.separator {
+    margin: 20px 0;
+    width: 100%;
+    max-width: 420px;
+    height: 2px;
+    background: white;
+}
+.signout-btn {
+    width: 100%;
+    max-width: 420px;
+    padding: 12px;
+    border-radius: 50px;
+    border: none;
+    background: white;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.signout-btn:hover {
+    transform: scale(1.05);
+}
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+    }
+    nav, .subscription-btn, .profile-icon {
+        display: none;
+    }
+    .menu-toggle {
+        display: flex;
+    }
+    .logo {
+        font-size: 22px;
+    }
+    .page-heading {
+        font-size: 1.6rem;
+    }
+}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-content">
-    <div class="left-section">
-      <div class="logo">CodeX</div>
-      <nav>
-        <button>Learn</button>
-        <button>Practice</button>
-        <button>Contact Us</button>
-        <button>Hackathon</button>
-      </nav>
+    <div class="header-content">
+        <div class="left-section">
+            <div class="logo">CodeX</div>
+            <div class="header-separator"></div>
+            <nav>
+                <button onclick="location.href='learn.html'">Learn</button>
+                <button onclick="location.href='practice.html'">Practice</button>
+                <button onclick="location.href='contactus.html'">Certification</button>
+                <button onclick="location.href='hackathon.html'">Hackathon</button>
+            </nav>
+        </div>
+        <div class="right-controls">
+            <button class="subscription-btn" onclick="location.href='subscription.html'">👑 Subscription</button>
+            <div class="profile-icon" onclick="location.href='profile.html'">👤</div>
+            <button class="menu-toggle"><span></span><span></span><span></span></button>
+        </div>
     </div>
-    <div class="right-controls">
-      <button class="subscription-btn">👑 Subscription</button>
-      <div class="profile-icon">👤</div>
-      <button class="menu-toggle"><span></span><span></span><span></span></button>
-    </div>
-  </div>
 </header>
 
 <div class="menu-overlay"></div>
 <div class="mobile-menu">
-  <div>Learn</div>
-  <div>Practice</div>
-  <div>Contact Us</div>
-  <div>Hackathon</div>
-  <div>Subscription</div>
-  <div>Profile</div>
-  <div style="color:#ff6ec4;">Sign Out</div>
+    <div onclick="location.href='learn.html'">Learn</div>
+    <div onclick="location.href='practice.html'">Practice</div>
+    <div onclick="location.href='certification.html'">Certification</div>
+    <div onclick="location.href='hackathon.html'">Hackathon</div>
+    <div onclick="location.href='subscription.html'">Subscription</div>
+    <div onclick="location.href='profile.html'">Profile</div>
+    <div style="color:#ff6ec4;" onclick="signOutUser()">Sign Out</div>
 </div>
 
 <section class="page-content">
-  <h1 class="page-heading">Profile</h1>
-  <div class="profile-card">
-    <div class="profile-avatar">👤</div>
-    <form id="profileForm" class="profile-form">
-      <label for="name">Your Name</label>
-      <input type="text" id="name" placeholder="Enter your name" required>
-      <label for="year">Year</label>
-      <input type="text" id="year" placeholder="Enter your year" required>
-      <label for="course">Course</label>
-      <input type="text" id="course" placeholder="Enter your course" required>
-      <button type="submit">Update Profile</button>
-      <p id="successMsg" class="success-msg">✅ Profile updated successfully!</p>
-    </form>
-  </div>
-
-  <div class="separator"></div>
-
-  <button class="signout-btn" id="signoutBtn">Sign Out</button>
+    <h1 class="page-heading">Profile</h1>
+    <div class="profile-card">
+        <div class="profile-avatar">👤</div>
+        <form id="profileForm" class="profile-form">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+            <label for="year">Year</label>
+            <input type="text" id="year" placeholder="Enter your year" required>
+            <label for="course">Course</label>
+            <input type="text" id="course" placeholder="Enter your course" required>
+            <button type="submit">Update Profile</button>
+            <p id="successMsg" class="success-msg">✅ Profile updated successfully!</p>
+        </form>
+    </div>
+    <div class="separator"></div>
+    <button class="signout-btn" id="signoutBtn">Sign Out</button>
 </section>
 
 <script type="module">
@@ -105,43 +342,80 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebas
 import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDyWILsGSUHkKFWJuYqzygVrSldgif5XLA",
-  authDomain: "codex-cf256.firebaseapp.com",
-  projectId: "codex-cf256",
-  storageBucket: "codex-cf256.firebasestorage.app",
-  messagingSenderId: "702124040393",
-  appId: "1:702124040393:web:5be6e4856003b438516d18",
-  measurementId: "G-4KFV1NBFTC"
+    apiKey: "AIzaSyDyWILsGSUHkKFWJuYqzygVrSldgif5XLA",
+    authDomain: "codex-cf256.firebaseapp.com",
+    projectId: "codex-cf256",
+    storageBucket: "codex-cf256.firebasestorage.app",
+    messagingSenderId: "702124040393",
+    appId: "1:702124040393:web:5be6e4856003b438516d18",
+    measurementId: "G-4KFV1NBFTC"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Redirect if user is not logged in
+// Check authentication status on page load
 onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    window.location.replace("login.html");
-  }
+    if (!user) {
+        window.location.replace("login.html");
+    }
 });
 
-// Dummy Profile Form
+// Mobile menu toggle
+document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.querySelector(".menu-toggle");
+    const mobileMenu = document.querySelector(".mobile-menu");
+    const overlay = document.querySelector(".menu-overlay");
+    if (toggleBtn && mobileMenu && overlay) {
+        toggleBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("show");
+            overlay.style.display = mobileMenu.classList.contains("show") ? "block" : "none";
+        });
+        overlay.addEventListener("click", () => {
+            mobileMenu.classList.remove("show");
+            overlay.style.display = "none";
+        });
+        document.querySelectorAll(".mobile-menu div").forEach(item => {
+            item.addEventListener("click", () => {
+                mobileMenu.classList.remove("show");
+                overlay.style.display = "none";
+            });
+        });
+    }
+});
+
+// Sign out function
+async function signOutUser() {
+    try {
+        await signOut(auth);
+        sessionStorage.clear();
+        localStorage.clear();
+        window.location.replace("login.html");
+    } catch (error) {
+        alert("Error signing out. Try again.");
+    }
+}
+
+// Profile form submission
 document.getElementById("profileForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  document.getElementById("successMsg").style.display = "block";
+    e.preventDefault();
+    document.getElementById("successMsg").style.display = "block";
 });
 
-// Sign Out
-document.getElementById("signoutBtn").addEventListener("click", async () => {
-  try {
-    await signOut(auth);
-    sessionStorage.clear();
-    localStorage.clear();
-    window.location.replace("login.html");
-  } catch (error) {
-    alert("Error signing out. Try again.");
-  }
+// Sign out button
+document.getElementById("signoutBtn").addEventListener("click", signOutUser);
+
+// Protect navigation links
+document.querySelectorAll('nav button, .mobile-menu div:not([style*="color:#ff6ec4"])').forEach(link => {
+    link.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (auth.currentUser) {
+            window.location.href = e.target.getAttribute("onclick")?.match(/'([^']+)'/)?.[1] || e.target.textContent.toLowerCase() + ".html";
+        } else {
+            window.location.replace("login.html");
+        }
+    });
 });
 </script>
-
 </body>
 </html>
