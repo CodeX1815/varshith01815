@@ -3,280 +3,396 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Certifications - CodeX</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<title>Front End</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
 <style>
+* {
+    box-sizing: border-box;
+}
 body {
-  margin:0;
-  font-family:'Segoe UI', sans-serif;
-  background:#0d0d0d;
-  color:white;
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #161818;
+    color: white;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
-/* Header */
-header { 
-  display:flex; 
-  justify-content:space-between; 
-  align-items:center; 
-  background:black; 
-  padding:22px 30px; 
-  position:relative; 
-  z-index:10; 
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: black;
+    padding: 22px 30px;
+    position: relative;
+    z-index: 10;
 }
-.header-content { display:flex; align-items:center; justify-content:space-between; width:100%; }
-.left-section { display:flex; align-items:center; gap:20px; }
-.logo { 
-  font-size:32px; font-weight:600; 
-  background: linear-gradient(90deg,#00ff87,#60efff,#ff6ec4,#7873f5); 
-  background-size:300% 300%; 
-  -webkit-background-clip:text; 
-  -webkit-text-fill-color:transparent; 
-  animation:floatGradient 5s infinite linear; 
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+}
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.logo {
+    font-size: 32px;
+    font-weight: 600;
+    background: linear-gradient(90deg, #00ff87, #60efff, #ff6ec4, #7873f5);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: floatGradient 5s infinite linear;
 }
 @keyframes floatGradient {
-  0% {background-position:0% 50%;}
-  50% {background-position:100% 50%;}
-  100% {background-position:0% 50%;}
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
-nav { display:flex; gap:1cm; }
-nav button, .subscription-btn { 
-  background:white; color:black; border:none; border-radius:20px; 
-  padding:10px 0; cursor:pointer; font-size:15px; width:130px; 
-  text-align:center; transition:all 0.2s ease; 
+.header-separator {
+    width: 2px;
+    height: 32px;
+    background-color: #76B900;
 }
-nav button:hover, .subscription-btn:hover { transform:scale(1.05); background:#f0f0f0; }
-.subscription-btn { background-color:#FFA500; font-weight:bold; color:black; }
-.right-controls { display:flex; align-items:center; gap:15px; }
-.profile-icon { font-size:22px; color:white; cursor:pointer; transition:0.2s ease; }
-.profile-icon:hover { transform:scale(1.1); color:#00ff87; }
-.menu-toggle { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; z-index:20; }
-.menu-toggle span { width:25px; height:3px; background:white; border-radius:2px; transition:0.3s; }
-.menu-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:15; }
-.mobile-menu { display:none; flex-direction:column; background:black; width:60%; height:auto; position:fixed; top:-100%; right:0; z-index:20; transition:top 0.4s ease-in-out; color:white; padding:20px 10px; }
-.mobile-menu.show { display:flex; top:0; }
-.mobile-menu div { padding:12px; text-align:left; font-size:16px; border-bottom:1px solid #333; cursor:pointer; }
+
+nav {
+    display: flex;
+    gap: 1cm;
+}
+nav button, .subscription-btn {
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 15px;
+    width: 130px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+nav button:hover, .subscription-btn:hover {
+    transform: scale(1.05);
+    background: #f0f0f0;
+}
+
+.subscription-btn {
+    background-color: #FFA500;
+    font-weight: bold;
+}
+.subscription-btn:active {
+    transform: scale(1.1);
+}
+
+.right-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.profile-icon {
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.profile-icon:hover {
+    transform: scale(1.1);
+    color: #00ff87;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 20;
+}
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+.menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 15;
+}
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: black;
+    width: 60%;
+    height: auto;
+    position: fixed;
+    top: -100%;
+    right: 0;
+    z-index: 20;
+    transition: top 0.4s ease-in-out;
+    color: white;
+    padding: 20px 10px;
+    overflow-x: hidden;
+}
+.mobile-menu.show {
+    display: flex;
+    top: 0;
+}
+.mobile-menu div {
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+    border-bottom: 1px solid #333;
+    cursor: pointer;
+}
 
 /* Certifications */
-.certifications { padding:60px 8%; }
-.certifications h2 {
-  font-size:2.8rem;
-  margin-bottom:40px;
-  text-align:center;
-  font-family:'Poppins', sans-serif;
-  font-weight:700;
-  background:linear-gradient(90deg,#ff6ec4,#7873f5);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+.certifications {
+    padding: 80px 5%;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
 }
-.section-block { margin-bottom:80px; }
+.certifications h2 {
+    font-size: 4rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    background: linear-gradient(90deg, #ff6ec4, #7873f5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.section-block {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
 .section-block h3 {
-  font-size:2rem;
-  margin-bottom:25px;
-  font-weight:700;
-  display:flex;
-  align-items:center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    text-align: left;
 }
 .section-block h3::before {
-  content:"";
-  display:inline-block;
-  width:6px;
-  height:30px;
-  background:#76B900;
-  margin-right:12px;
-  border-radius:3px;
+    content: "";
+    width: 10px;
+    height: 32px;
+    background: #00ff87;
+    margin-right: 12px;
 }
 
 /* Cards */
 .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(7cm, 1fr));
-  gap: 1cm; /* exactly 1cm gap between cards */
-  justify-items: start; /* keeps cards aligned left if extra space */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1cm;
+    justify-content: flex-start;
+    max-width: 100%;
 }
 .card {
-  width: 7cm;
-  height: 4cm;
-  border-radius: 14px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-  cursor: pointer;
-  transition: all 0.3s ease;
+    width: 280px;
+    height: 160px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    flex: 0 1 auto;
 }
-
-.card:hover { transform:translateY(-5px) scale(1.03); }
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
 .card-top {
-  flex:6; /* 60% */
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:0.9rem;
-  font-weight:600;
-  color:white;
-  background-size:200% 200%;
-  animation:floatGradient 5s infinite linear;
+    flex: 6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-size: 200% 200%;
+    animation: floatGradient 6s ease-in-out infinite;
 }
 .card-bottom {
-  flex:4; /* 40% */
-  background:white;
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  font-size:1rem;
-  font-weight:700;
-  color:black;
-  padding-left:10px;
-  position:relative;
+    flex: 4;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0a0a0a;
 }
-.card-bottom::before {
-  content:"";
-  width:5px;
-  height:60%;
-  background:#76B900;
-  position:absolute;
-  left:0;
-  top:20%;
-  border-radius:3px;
+.card a {
+    color: #0a0a0a;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 /* Unique gradients */
-.card:nth-child(1) .card-top { background:linear-gradient(135deg,#ff6ec4,#7873f5); }
-.card:nth-child(2) .card-top { background:linear-gradient(135deg,#00ff87,#60efff); }
-.card:nth-child(3) .card-top { background:linear-gradient(135deg,#f7971e,#ffd200); }
-.card:nth-child(4) .card-top { background:linear-gradient(135deg,#8e2de2,#4a00e0); }
-.card:nth-child(5) .card-top { background:linear-gradient(135deg,#11998e,#38ef7d); }
-.card:nth-child(6) .card-top { background:linear-gradient(135deg,#f953c6,#b91d73); }
-.card a {
-  color:black;
-  text-decoration:none;
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  padding-left:10px;
-}
+.card:nth-child(1) .card-top { background: linear-gradient(135deg, #ff6ec4, #7873f5); }
+.card:nth-child(2) .card-top { background: linear-gradient(135deg, #00ff87, #60efff); }
+.card:nth-child(3) .card-top { background: linear-gradient(135deg, #f7971e, #ffd200); }
+.card:nth-child(4) .card-top { background: linear-gradient(135deg, #8e2de2, #4a00e0); }
+.card:nth-child(5) .card-top { background: linear-gradient(135deg, #11998e, #38ef7d); }
+.card:nth-child(6) .card-top { background: linear-gradient(135deg, #f953c6, #b91d73); }
 
 /* Responsive */
-@media (max-width:768px) {
-  nav, .subscription-btn, .profile-icon { display:none; }
-  .menu-toggle { display:flex; }
-  .certifications { padding:40px 5%; }
-  .certifications h2 { font-size:2.2rem; }
-  .section-block h3 { font-size:1.6rem; }
-  .cards { grid-template-columns: repeat(auto-fit, minmax(5cm, 1fr)); gap:0.8cm; }
-  .card { width:5cm; height:3cm; }
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+    }
+    nav, .subscription-btn, .profile-icon {
+        display: none;
+    }
+    .menu-toggle {
+        display: flex;
+    }
+    .certifications {
+        padding: 40px 5%;
+    }
+    .certifications h2 {
+        font-size: 2rem;
+    }
+    .section-block h3 {
+        font-size: 1.5rem;
+    }
+    .cards {
+        gap: 0.8cm;
+        justify-content: center;
+    }
+    .card {
+        width: 200px;
+        height: 120px;
+    }
+    .card-bottom {
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
 }
 </style>
 </head>
 <body>
+    <header>
+        <div class="header-content">
+            <div class="left-section">
+                <div class="logo">CodeX</div>
+                <div class="header-separator"></div>
+                <nav>
+                    <button onclick="location.href='learn.html'">Learn</button>
+                    <button onclick="location.href='practice.html'">Practice</button>
+                    <button onclick="location.href='contactus.html'">Certification</button>
+                    <button onclick="location.href='hackathon.html'">Hackathon</button>
+                </nav>
+            </div>
+            <div class="right-controls">
+                <button class="subscription-btn" onclick="location.href='subscription.html'">👑 Subscription</button>
+                <div class="profile-icon" onclick="location.href='profile.html'">👤</div>
+                <button class="menu-toggle"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </header>
 
-<header>
-  <div class="header-content">
-    <div class="left-section">
-      <div class="logo">CodeX</div>
-      <nav>
-        <button onclick="location.href='learn.html'">Learn</button>
-        <button onclick="location.href='practice.html'">Practice</button>
-        <button onclick="location.href='certification.html'">Certification</button>
-        <button onclick="location.href='hackathon.html'">Hackathon</button>
-      </nav>
+    <div class="menu-overlay"></div>
+    <div class="mobile-menu">
+        <div onclick="location.href='learn.html'">Learn</div>
+        <div onclick="location.href='practice.html'">Practice</div>
+        <div onclick="location.href='certification.html'">Certification</div>
+        <div onclick="location.href='hackathon.html'">Hackathon</div>
+        <div onclick="location.href='subscription.html'">Subscription</div>
+        <div onclick="location.href='profile.html'">Profile</div>
     </div>
-    <div class="right-controls">
-      <button class="subscription-btn" onclick="location.href='subscription.html'">👑 Subscription</button>
-      <div class="profile-icon" onclick="location.href='profile.html'">👤</div>
-      <button class="menu-toggle"><span></span><span></span><span></span></button>
-    </div>
-  </div>
-</header>
 
-<div class="menu-overlay"></div>
-<div class="mobile-menu">
-  <div onclick="location.href='learn.html'">Learn</div>
-  <div onclick="location.href='practice.html'">Practice</div>
-  <div onclick="location.href='certification.html'">Certification</div>
-  <div onclick="location.href='hackathon.html'">Hackathon</div>
-  <div onclick="location.href='subscription.html'">Subscription</div>
-  <div onclick="location.href='profile.html'">Profile</div>
-</div>
+    <section class="certifications">
+        <h2>Certifications</h2>
+        <div class="section-block">
+            <h3>Foundational Certifications</h3>
+            <div class="cards">
+                <a href="https://cloud.google.com/learn/certification/cloud-digital-leader" class="card">
+                    <div class="card-top"></div>
+                    <div class="card-bottom">Google Cloud Digital Leader</div>
+                </a>
+                <a href="https://cloud.google.com/learn/certification/generative-ai-leader" class="card">
+                    <div class="card-top"></div>
+                    <div class="card-bottom">Google GenAI Leader</div>
+                </a>
+            </div>
+        </div>
+        <div class="section-block">
+            <h3>Associate Certifications</h3>
+            <div class="cards">
+                <a href="https://cloud.google.com/learn/certification/cloud-engineer" class="card">
+                    <div class="card-top"></div>
+                    <div class="card-bottom">Google Cloud Engineer</div>
+                </a>
+                <a href="https://cloud.google.com/learn/certification/data-practitioner" class="card">
+                    <div class="card-top"></div>
+                    <div class="card-bottom">Google Data Practitioner</div>
+                </a>
+            </div>
+        </div>
+        <div class="section-block">
+            <h3>Professional Certifications</h3>
+            <div class="cards">
+                <a href="https://cloud.google.com/learn/certification/cloud-architect" class="card">
+                    <div class="card-top"></div>
+                    <div class="card-bottom">Google Cloud Architect</div>
+                </a>
+                <a href="https://cloud.google.com/learn/certification/cloud-developer" class="card">
+                    <div class="card-top"></div>
+                    <div class="card-bottom">Google Cloud Developer</div>
+                </a>
+                <a href="https://cloud.google.com/learn/certification/cloud-devops-engineer" class="card">
+                    <div class="card-top"></div>
+                    <div class="card-bottom">Google Cloud DevOps Engineer</div>
+                </a>
+            </div>
+        </div>
+    </section>
 
-<section class="certifications">
-  <h2>Certifications</h2>
-
-  <div class="section-block">
-    <h3>Foundational Certifications</h3>
-    <div class="cards">
-      <div class="card">
-        <div class="card-top"></div>
-        <div class="card-bottom"><a href="https://cloud.google.com/learn/certification/cloud-digital-leader/">Google Cloud Digi leader</a></div>
-      </div>
-      <div class="card">
-        <div class="card-top"></div>
-        <div class="card-bottom"><a href="https://cloud.google.com/learn/certification/generative-ai-leader">Google GenAI Leader</a></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-block">
-    <h3>Associate Certifications</h3>
-    <div class="cards">
-      <div class="card">
-        <div class="card-top"></div>
-        <div class="card-bottom"><a href="https://cloud.google.com/learn/certification/cloud-engineer/">Google Cloud Engineer</a></div>
-      </div>
-      <div class="card">
-        <div class="card-top"></div>
-        <div class="card-bottom"><a href="https://cloud.google.com/learn/certification/data-practitioner">Google Data Practitioner</a></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-block">
-    <h3>Professional Certifications</h3>
-    <div class="cards">
-      <div class="card">
-        <div class="card-top"></div>
-        <div class="card-bottom"><a href="https://cloud.google.com/learn/certification/cloud-architect/">Google Cloud Architect</a></div>
-      </div>
-      <div class="card">
-        <div class="card-top"></div>
-        <div class="card-bottom"><a href="https://cloud.google.com/learn/certification/cloud-developer/">Google Cloud Developer</a></div>
-      </div>
-      <div class="card">
-        <div class="card-top"></div>
-        <div class="card-bottom"><a href="https://cloud.google.com/learn/certification/cloud-devops-engineer/">Google Cloud DevOps Engineer</a></div>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const toggleBtn = document.querySelector(".menu-toggle");
-  const mobileMenu = document.querySelector(".mobile-menu");
-  const overlay = document.querySelector(".menu-overlay");
-  if(toggleBtn && mobileMenu && overlay){
-    toggleBtn.addEventListener("click", ()=>{
-      mobileMenu.classList.toggle("show");
-      overlay.style.display = mobileMenu.classList.contains("show") ? "block":"none";
-    });
-    overlay.addEventListener("click", ()=>{
-      mobileMenu.classList.remove("show");
-      overlay.style.display="none";
-    });
-    document.querySelectorAll(".mobile-menu div").forEach(item=>{
-      item.addEventListener("click", ()=>{
-        mobileMenu.classList.remove("show");
-        overlay.style.display="none";
-      });
-    });
-  }
-});
-</script>
-
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggleBtn = document.querySelector(".menu-toggle");
+            const mobileMenu = document.querySelector(".mobile-menu");
+            const overlay = document.querySelector(".menu-overlay");
+            if (toggleBtn && mobileMenu && overlay) {
+                toggleBtn.addEventListener("click", () => {
+                    mobileMenu.classList.toggle("show");
+                    overlay.style.display = mobileMenu.classList.contains("show") ? "block" : "none";
+                });
+                overlay.addEventListener("click", () => {
+                    mobileMenu.classList.remove("show");
+                    overlay.style.display = "none";
+                });
+                document.querySelectorAll(".mobile-menu div").forEach(item => {
+                    item.addEventListener("click", () => {
+                        mobileMenu.classList.remove("show");
+                        overlay.style.display = "none";
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
